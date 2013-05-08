@@ -3,3 +3,4 @@ traceRkinetic.Rproj
 .Rbuildignore
 .Rhistory
 .Rproj.user/
+*-Ex.R
