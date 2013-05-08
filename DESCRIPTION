@@ -1,0 +1,14 @@
+Package: traceRkinetic
+Type: Package
+Title: Kinetic analysis for dynamic nuclear imaging: compartmental models
+Version: 0.1
+Date: 2013-04-12
+Author: Jose Maria Mateos-Perez
+Maintainer: Jose Maria Mateos-Perez <jmmateos@mce.hggm.es>
+Description: This package implements compartmental models and linear 
+ approximations needed to perform kinetic analysis on dynamic medical images.
+ The provided functions use the tissue time-activity curves, the input function
+ and the frame times as input, and return the kinetic parameters and the 
+ estimated errors.
+License: GPL-3
+Depends: minpack.lm

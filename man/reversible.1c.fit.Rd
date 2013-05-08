@@ -1,0 +1,58 @@
+\name{reversible.1c.fit}
+\alias{reversible.1c.fit}
+\title{Reversible one-tissue compartment model fit}
+\usage{
+  reversible.1c.fit(input.function, tissue, time.start,
+    time.end, K1.start = 0.5, K1.lower = 0, K1.upper = 1,
+    k2.start = 0.5, k2.lower = 0, k2.upper = 1,
+    vB.start = 0.05, vB.lower = 0, vB.upper = 1,
+    left.ventricle = input.function,
+    weight = time.end - time.start, plot = FALSE,
+    interpolation.type = 1, ...)
+}
+\arguments{
+  \item{input.function}{Input function TAC.}
+
+  \item{tissue}{Tissue TAC.}
+
+  \item{time.start}{Initial acquisition time for each
+  frame.}
+
+  \item{time.end}{Final acquisition time for each frame.}
+
+  \item{K1.start,k2.start,vB.start}{Initial parameter
+  values.}
+
+  \item{K1.lower,k2.lower,vB.lower}{Parameter lower
+  bounds.}
+
+  \item{K1.upper,k2.upper,vB.upper}{Parameter upper
+  bounds.}
+
+  \item{left.ventricle}{Left ventricle TAC, used for
+  spill-over corretion.  Defaults to
+  \code{input.function}.}
+
+  \item{weight}{Weight vector for the non-linear squares
+  fit. Defaults to frame length.}
+
+  \item{plot}{\code{TRUE} if a plot is to be shown.
+  Defaults to \code{FALSE}.}
+
+  \item{interpolation.type}{Interpolation type selection.
+  Passed to \code{\link{interpolate.tac}}. Defaults to 1.}
+
+  \item{...}{Other parameters passed to the plot function,
+  if used.}
+}
+\value{
+  Returns a list with three fields: \code{kparms}, the
+  computed kinetic parameters; \code{stderrors}, the
+  standard errors for each parameter as a percentage;
+  \code{fit}, the actual fitted object.
+}
+\description{
+  Fits the model implemented in
+  \code{\link{reversible.1c.model}}.
+}
+
