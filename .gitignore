@@ -1,2 +1,5 @@
 inst
 traceRkinetic.Rproj
+.Rbuildignore
+.Rhistory
+.Rproj.user/
