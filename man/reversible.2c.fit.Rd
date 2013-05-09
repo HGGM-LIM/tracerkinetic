@@ -17,10 +17,11 @@
 
   \item{tissue}{Tissue TAC.}
 
-  \item{time.start}{Initial acquisition time for each
-  frame.}
+  \item{time.start}{Initial acquisition time for each frame
+  (in minutes).}
 
-  \item{time.end}{Final acquisition time for each frame.}
+  \item{time.end}{Final acquisition time for each frame (in
+  minutes).}
 
   \item{K1.start,k2.start,k3.start,k4.start,vB.start}{Initial
   parameter values.}

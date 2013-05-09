@@ -13,6 +13,13 @@
 #' @param plot Should the Logan plot be displayed? Defaults to \code{TRUE}.
 #' @param ... Additional parameters passed to the \code{plot} function.
 #' 
+#' @details Please refer to the documentation of \code{\link{processlinear}}
+#'   for implementation details. 
+#' 
+#' @return Returns a list with three fields: \code{kparms}, the computed kinetic
+#'   parameters; \code{stderrors}, the standard errors for each parameter as a 
+#'   percentage; \code{fit}, the actual fitted object.
+#'   
 #' @references J. Logan, J. S. Fowler, N. D. Volkow, A. P. Wolf, S. L.
 #' Dewey, D. J. Schlyer, R. R. MacGregor, R. Hitzemann, B. Bendriem, and S. J.
 #' Gatley, "Graphical analysis of reversible radioligand binding from
@@ -21,7 +28,8 @@
 #' journal of the International Society of Cerebral Blood Flow and Metabolism,
 #' vol. 10, no. 5, pp. 740-7, Sep. 1990.
 #' 
-#' @export
+#' @seealso \code{\link{patlak.plot}}.
+
 logan.plot <- function(input.function, tissue, time.start, time.end, 
                        plot = TRUE, ...) {
     
@@ -39,6 +47,6 @@ logan.plot <- function(input.function, tissue, time.start, time.end,
     res <- processlinear(termx, termy, plot, main = "Logan", 
                          xlab = "Int(Cplasma) / Ctissue [min]",
                          ylab = "Int(Ctissue) / Ctissue [min]", ...)
-    
+        
     return(res)
 }

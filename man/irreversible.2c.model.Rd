@@ -17,10 +17,11 @@
 
   \item{vB}{Fraction of blood in tissue.}
 
-  \item{time.start}{Initial acquisition time for each
-  frame.}
+  \item{time.start}{Initial acquisition time for each frame
+  (in minutes).}
 
-  \item{time.end}{Final acquisition time for each frame.}
+  \item{time.end}{Final acquisition time for each frame (in
+  minutes).}
 
   \item{left.ventricle}{Left ventricle TAC, used for
   spill-over corretion.  Defaults to

@@ -4,16 +4,15 @@
 #' @param K1 K1 parameter.
 #' @param k2 k2 parameter.
 #' @param vB Fraction of blood in tissue.
-#' @param time.start Initial acquisition time for each frame.
-#' @param time.end Final acquisition time for each frame.
+#' @param time.start Initial acquisition time for each frame (in minutes).
+#' @param time.end Final acquisition time for each frame (in minutes).
 #' @param left.ventricle Left ventricle TAC, used for spill-over corretion.
 #'   Defaults to \code{input.function}.
 #' @param interpolation.type Interpolation type selection. Passed to
 #'   \code{\link{interpolate.tac}}. Defaults to 1.
 #' 
 #' @return The TAC resulting of solving the model with the given parameters.
-#' 
-#' @export
+
 reversible.1c.model <- function(input.function, K1, k2, vB, 
                                 time.start, time.end, 
                                 left.ventricle = input.function,
@@ -39,8 +38,8 @@ reversible.1c.model <- function(input.function, K1, k2, vB,
 #' 
 #' @param input.function Input function TAC.
 #' @param tissue Tissue TAC.
-#' @param time.start Initial acquisition time for each frame.
-#' @param time.end Final acquisition time for each frame.
+#' @param time.start Initial acquisition time for each frame (in minutes).
+#' @param time.end Final acquisition time for each frame (in minutes).
 #' @param K1.start,k2.start,vB.start Initial parameter values.
 #' @param K1.lower,k2.lower,vB.lower Parameter lower bounds.
 #' @param K1.upper,k2.upper,vB.upper Parameter upper bounds.
@@ -56,8 +55,7 @@ reversible.1c.model <- function(input.function, K1, k2, vB,
 #' @return Returns a list with three fields: \code{kparms}, the computed kinetic
 #'   parameters; \code{stderrors}, the standard errors for each parameter as a 
 #'   percentage; \code{fit}, the actual fitted object.
-#'   
-#' @export
+
 reversible.1c.fit <- function(input.function, tissue, time.start, time.end, 
                               K1.start = 0.5, K1.lower = 0, K1.upper = 1,
                               k2.start = 0.5, k2.lower = 0, k2.upper = 1,

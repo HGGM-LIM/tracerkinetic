@@ -8,8 +8,7 @@
 #' @param legend.pos Position for the legend in the plot. Defaults to 
 #'  \code{"bottomright"}. \code{NULL} to disable.
 #' @param ... Other parameters passed to the plot function.
-#' 
-#' @export
+
 plotfit <- function(tissue, fit, time, legend.pos = "bottomright", ...) {    
     # Plots the results of fitting a given tissue TAC.
     #

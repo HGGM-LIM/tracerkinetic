@@ -12,8 +12,7 @@
 #'   
 #' @return A list containing \code{tsample}, the sampling time vector and the 
 #'   \code{y}, the interpolated TAC.
-#' 
-#' @export
+
 interpolate.tac <- function(tac, time.start, time.end, 
                             interpolation.type = 1) {
     
@@ -45,8 +44,7 @@ interpolate.tac <- function(tac, time.start, time.end,
 #' @param time.points The new time points for which the signal is desired.
 #'   
 #' @return The new interpolated TAC.
-#'   
-#' @export
+
 revinterpolate.tac <- function(tac, tsample, time.points) {
         
     approx(tsample, tac, xout = time.points, rule = 2)$y

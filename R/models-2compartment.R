@@ -6,16 +6,15 @@
 #' @param k3 k3 parameter.
 #' @param k4 k4 parameter.
 #' @param vB Fraction of blood in tissue.
-#' @param time.start Initial acquisition time for each frame.
-#' @param time.end Final acquisition time for each frame.
+#' @param time.start Initial acquisition time for each frame (in minutes).
+#' @param time.end Final acquisition time for each frame (in minutes).
 #' @param left.ventricle Left ventricle TAC, used for spill-over corretion.
 #'   Defaults to \code{input.function}.
 #' @param interpolation.type Interpolation type selection. Passed to
 #'   \code{\link{interpolate.tac}}. Defaults to 1.
 #' 
 #' @return The TAC resulting of solving the model with the given parameters.
-#' 
-#' @export
+
 reversible.2c.model <- function(input.function, K1, k2, k3, k4, vB, 
                                 time.start, time.end, 
                                 left.ventricle = input.function, 
@@ -64,8 +63,8 @@ reversible.2c.model <- function(input.function, K1, k2, k3, k4, vB,
 #' 
 #' @param input.function Input function TAC.
 #' @param tissue Tissue TAC.
-#' @param time.start Initial acquisition time for each frame.
-#' @param time.end Final acquisition time for each frame.
+#' @param time.start Initial acquisition time for each frame (in minutes).
+#' @param time.end Final acquisition time for each frame (in minutes).
 #' @param K1.start,k2.start,k3.start,k4.start,vB.start Initial parameter values.
 #' @param K1.lower,k2.lower,k3.lower,k4.lower,vB.lower Parameter lower bounds.
 #' @param K1.upper,k2.upper,k3.upper,k4.upper,vB.upper Parameter upper bounds.
@@ -81,8 +80,7 @@ reversible.2c.model <- function(input.function, K1, k2, k3, k4, vB,
 #' @return Returns a list with three fields: \code{kparms}, the computed kinetic
 #'   parameters; \code{stderrors}, the standard errors for each parameter as a 
 #'   percentage; \code{fit}, the actual fitted object.
-#'   
-#' @export
+
 reversible.2c.fit <- function(input.function, tissue, time.start, time.end, 
                               K1.start = 0.1, K1.lower = 0, K1.upper = 8,
                               k2.start = 0.1, k2.lower = 0, k2.upper = 8,
@@ -135,16 +133,15 @@ reversible.2c.fit <- function(input.function, tissue, time.start, time.end,
 #' @param k2 k2 parameter.
 #' @param k3 k3 parameter.
 #' @param vB Fraction of blood in tissue.
-#' @param time.start Initial acquisition time for each frame.
-#' @param time.end Final acquisition time for each frame.
+#' @param time.start Initial acquisition time for each frame (in minutes).
+#' @param time.end Final acquisition time for each frame (in minutes).
 #' @param left.ventricle Left ventricle TAC, used for spill-over corretion.
 #'   Defaults to \code{input.function}.
 #' @param interpolation.type Interpolation type selection. Passed to
 #'   \code{\link{interpolate.tac}}. Defaults to 1.
 #' 
 #' @return The TAC resulting of solving the model with the given parameters.
-#' 
-#' @export
+
 irreversible.2c.model <- function(input.function, K1, k2, k3, vB,
                                   time.start, time.end,
                                   left.ventricle = input.function,
@@ -174,8 +171,8 @@ irreversible.2c.model <- function(input.function, K1, k2, k3, vB,
 #' 
 #' @param input.function Input function TAC.
 #' @param tissue Tissue TAC.
-#' @param time.start Initial acquisition time for each frame.
-#' @param time.end Final acquisition time for each frame.
+#' @param time.start Initial acquisition time for each frame (in minutes).
+#' @param time.end Final acquisition time for each frame (in minutes).
 #' @param K1.start,k2.start,k3.start,vB.start Initial parameter values.
 #' @param K1.lower,k2.lower,k3.lower,vB.lower Parameter lower bounds.
 #' @param K1.upper,k2.upper,k3.upper,vB.upper Parameter upper bounds.
@@ -191,8 +188,7 @@ irreversible.2c.model <- function(input.function, K1, k2, k3, vB,
 #' @return Returns a list with three fields: \code{kparms}, the computed kinetic
 #'   parameters; \code{stderrors}, the standard errors for each parameter as a 
 #'   percentage; \code{fit}, the actual fitted object.
-#'   
-#' @export
+
 irreversible.2c.fit <- function(input.function, tissue, time.start, time.end, 
                                 K1.start = 0.1, K1.lower = 0, K1.upper = 8,
                                 k2.start = 0.1, k2.lower = 0, k2.upper = 8,
@@ -238,8 +234,8 @@ irreversible.2c.fit <- function(input.function, tissue, time.start, time.end,
 #' 
 #' @param input.function Input function TAC.
 #' @param tissue Tissue TAC.
-#' @param time.start Initial acquisition time for each frame.
-#' @param time.end Final acquisition time for each frame.
+#' @param time.start Initial acquisition time for each frame (in minutes).
+#' @param time.end Final acquisition time for each frame (in minutes).
 #' @param K1.start,k2.start,k3.start,vB.start Initial parameter values.
 #' @param K1.lower,k2.lower,k3.lower,vB.lower Parameter lower bounds.
 #' @param K1.upper,k2.upper,k3.upper,vB.upper Parameter upper bounds.
@@ -253,10 +249,7 @@ irreversible.2c.fit <- function(input.function, tissue, time.start, time.end,
 #' @return Returns a list with three fields: \code{kparms}, the computed kinetic
 #'   parameters; \code{stderrors}, the standard errors for each parameter as a 
 #'   percentage; \code{fit}, the actual fitted object.
-#'   
-#' @export
-#' 
-#' @export
+
 nh3.2c.fit <- function(input.function, tissue, time.start, time.end, 
                        K1.start = 0.1, K1.lower = 0, K1.upper = 8,
                        k2.start = 0.1, k2.lower = 0, k2.upper = 8,

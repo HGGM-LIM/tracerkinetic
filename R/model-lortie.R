@@ -7,8 +7,8 @@
 #' @param FLV Fraction of blood (from left ventricle) in myocardium TAC.
 #' @param flow Myocardial blood flow.
 #' @param k2 Rate constant.
-#' @param time.start Initial acquisition time for each frame.
-#' @param time.end Final acquisition time for each frame.
+#' @param time.start Initial acquisition time for each frame (in minutes).
+#' @param time.end Final acquisition time for each frame (in minutes).
 #' @param a Parameter \code{a} of the Renkin-Crone equation implemented in 
 #'   \code{\link{flow2k1}}. Defaults to 0.77 [unitless].
 #' @param b Parameter \code{b} of the Renkin-Crone equation implemented in 
@@ -24,8 +24,7 @@
 #'   Dasilva, and R. a DeKemp, "Quantification of myocardial blood flow with 
 #'   82Rb dynamic PET imaging.," European journal of nuclear medicine and 
 #'   molecular imaging, vol. 34, no. 11, pp. 1765-74, Nov. 2007.
-#'   
-#' @export
+
 lortie.model <- function(input.function, FLV, flow, k2, time.start, time.end, 
                          a = 0.77, b = 0.63, left.ventricle = input.function, 
                          interpolation.type = 1) {        
@@ -64,8 +63,7 @@ lortie.model <- function(input.function, FLV, flow, k2, time.start, time.end,
 #'  [ml/min/g].
 #'  
 #' @return The K1 parameter value.
-#' 
-#' @export
+
 flow2k1 <- function(flow, a = 0.77, b = 0.63) {    
     (1 - a*exp(-b/flow))*flow     
 }
@@ -77,8 +75,8 @@ flow2k1 <- function(flow, a = 0.77, b = 0.63) {
 #' 
 #' @param input.function Input function TAC (typically, left ventricle).
 #' @param tissue Tissue (myocardium) TAC.
-#' @param time.start Initial time for each frame.
-#' @param time.end End time for each frame.
+#' @param time.start Initial time for each frame (in minutes).
+#' @param time.end End time for each frame (in minutes).
 #' @param a Parameter \code{a} of the Renkin-Crone equation implemented in 
 #'   \code{\link{flow2k1}}. Defaults to 0.77 [unitless].
 #' @param b Parameter \code{b} of the Renkin-Crone equation implemented in 
@@ -100,8 +98,7 @@ flow2k1 <- function(flow, a = 0.77, b = 0.63) {
 #' @return Returns a list with three fields: \code{kparms}, the computed kinetic
 #'   parameters; \code{stderrors}, the standard errors for each parameter as a 
 #'   percentage; \code{fit}, the actual fitted object.
-#'   
-#' @export
+
 lortie.fit <- function(input.function, tissue, time.start, time.end, 
                        a = 0.77, b = 0.63,
                        FLV.start = 0.1, FLV.lower = 0, FLV.upper = 1,

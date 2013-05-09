@@ -16,9 +16,10 @@
 
   \item{tissue}{Tissue (myocardium) TAC.}
 
-  \item{time.start}{Initial time for each frame.}
+  \item{time.start}{Initial time for each frame (in
+  minutes).}
 
-  \item{time.end}{End time for each frame.}
+  \item{time.end}{End time for each frame (in minutes).}
 
   \item{a}{Parameter \code{a} of the Renkin-Crone equation
   implemented in \code{\link{flow2k1}}. Defaults to 0.77

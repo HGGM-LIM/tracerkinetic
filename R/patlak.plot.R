@@ -1,7 +1,7 @@
 #' Patlak plot implementation
 #' 
-#' Implements a Patlak plot linear analysis, another graphical method for
-#' analysis of tracers that can be modeled after an irreversible two-tissue
+#' Implements a Patlak plot linear analysis, another graphical method for 
+#' analysis of tracers that can be modeled after an irreversible two-tissue 
 #' compartment model.
 #' 
 #' @param input.function Input function TAC.
@@ -11,9 +11,18 @@
 #' @param plot Should the Patlak plot be displayed? Defaults to \code{TRUE}.
 #' @param ... Additional parameters passed to the \code{plot} function.
 #' 
-#' @references TODO
+#' @details Please refer to the documentation of \code{\link{processlinear}}
+#'   for implementation details. 
+#'   
+#' @return Returns a list with three fields: \code{kparms}, the computed kinetic
+#'   parameters; \code{stderrors}, the standard errors for each parameter as a 
+#'   percentage; \code{fit}, the actual fitted object.
+#'   
+#' @references C. Patlak, R. Blasberg, and J. Fenstermacher, "Graphical
+#'   evaluation of blood-to-brain transfer constants from multiple-time uptake
+#'   data," J Cereb Blood Flow Metab, 1983.
 #' 
-#' @export
+#' @seealso \code{\link{logan.plot}}.
 
 patlak.plot <- function(input.function, tissue, time.start, time.end, 
                         plot = TRUE, ...) {

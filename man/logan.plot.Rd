@@ -21,6 +21,12 @@
   \item{...}{Additional parameters passed to the
   \code{plot} function.}
 }
+\value{
+  Returns a list with three fields: \code{kparms}, the
+  computed kinetic parameters; \code{stderrors}, the
+  standard errors for each parameter as a percentage;
+  \code{fit}, the actual fitted object.
+}
 \description{
   Implements a Logan plot, or Logan graphical analysis, a
   "graphical method of analysis applicable to ligands that
@@ -28,6 +34,10 @@
   simultaneous measurement of plasma and tissue
   radioactivities for multiple times after the injection of
   a radiolabeled tracer is presented".
+}
+\details{
+  Please refer to the documentation of
+  \code{\link{processlinear}} for implementation details.
 }
 \references{
   J. Logan, J. S. Fowler, N. D. Volkow, A. P. Wolf, S. L.
@@ -39,5 +49,8 @@
   flow and metabolism : official journal of the
   International Society of Cerebral Blood Flow and
   Metabolism, vol. 10, no. 5, pp. 740-7, Sep. 1990.
+}
+\seealso{
+  \code{\link{patlak.plot}}.
 }
 
