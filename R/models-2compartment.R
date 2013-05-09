@@ -226,7 +226,9 @@ irreversible.2c.fit <- function(input.function, tissue, time.start, time.end,
 }
 
 #' Computes the one-tissue compartmental model parameters for the 13-ammonia
-#' tracer. Automatically performs the metabolite correction implemented in 
+#' tracer. 
+#' 
+#' Automatically performs the metabolite correction implemented in 
 #' \code{\link{nh3.vdhoff.correction}} to the \code{input.function} term. The
 #' \code{left.ventricle} term is not provided. All the other parameters are
 #' provided just like in the \code{\link{irreversible.2c.fit}} function and the

@@ -1,11 +1,7 @@
 \name{nh3.2c.fit}
 \alias{nh3.2c.fit}
 \title{Computes the one-tissue compartmental model parameters for the 13-ammonia
-tracer. Automatically performs the metabolite correction implemented in
-\code{\link{nh3.vdhoff.correction}} to the \code{input.function} term. The
-\code{left.ventricle} term is not provided. All the other parameters are
-provided just like in the \code{\link{irreversible.2c.fit}} function and the
-return values are the same.}
+tracer.}
 \usage{
   nh3.2c.fit(input.function, tissue, time.start, time.end,
     K1.start = 0.1, K1.lower = 0, K1.upper = 8,
@@ -54,10 +50,8 @@ return values are the same.}
   \code{fit}, the actual fitted object.
 }
 \description{
-  Computes the one-tissue compartmental model parameters
-  for the 13-ammonia tracer. Automatically performs the
-  metabolite correction implemented in
-  \code{\link{nh3.vdhoff.correction}} to the
+  Automatically performs the metabolite correction
+  implemented in \code{\link{nh3.vdhoff.correction}} to the
   \code{input.function} term. The \code{left.ventricle}
   term is not provided. All the other parameters are
   provided just like in the
