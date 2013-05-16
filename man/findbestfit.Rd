@@ -2,7 +2,7 @@
 \alias{findbestfit}
 \title{Finds optimal fitting point}
 \usage{
-  findbestfit(x, y, minpoints = 3, maxerror = 0.05)
+  findbestfit(x, y, minpoints = 3, maxerror = 0.1)
 }
 \arguments{
   \item{x,y}{Regression data}

@@ -8,7 +8,7 @@
 #' @param maxerror The maximum error rate allowed.
 #' 
 #' @details This function finds the earliest point that allows to have a 
-#'   regression with less than 5% error between the chosen points (this 
+#'   regression with less than 10% error between the chosen points (this 
 #'   parameter is controlled by the \code{maxerror} variable). If no point
 #'   allows to have this error rate, the point that yields the minimum 
 #'   regression error is used.
@@ -16,16 +16,16 @@
 #' @return A list containing the time point chosen, \code{initial.time.point}, 
 #'   and the actual fitted object, \code{fit}.
 
-findbestfit <- function(x, y, minpoints = 3, maxerror = 0.05) {
-    
+findbestfit <- function(x, y, minpoints = 3, maxerror = 0.10) {
+        
     fitdata <- data.frame(x, y)
     n <- nrow(fitdata)
     res <- rep(NA, n - minpoints + 1)
     
     for (i in 1:(n - minpoints + 1)) {
         fd <- fitdata[i:n, ]        
-        lm1 <- lm(y ~ x, data = fd)
-        res[i] <- sqrt(sum(lm1$residuals^2) / nrow(fd))        
+        lm1 <- lm(y ~ x, data = fd)    
+        res[i] <- max(lm1$residuals / fd$y)
     }            
     
     suppressWarnings(respoint <- min(which(res < maxerror)))
