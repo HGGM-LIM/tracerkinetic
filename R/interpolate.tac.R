@@ -20,10 +20,13 @@ interpolate.tac <- function(tac, time.start, time.end,
     tac0 <- c(0, tac)
     time.end0 <- c(0, time.end)    
     # Compute frame length for next step
-    frame.length <- time.end - time.start
+    #frame.length <- time.end - time.start
+    frame.length <- min(time.end - time.start)    
     # The time.vector variable divides all the frames into the minimum 
-    # time length unit, which is a second (1/60 minutes).         
-    time.vector <- seq(0, max(time.end), 1/60)      
+    # time length unit, which is a second (1/60 minutes).             
+    #time.vector <- seq(0, max(time.end), 1/60)      
+    reps <- ceiling(max(time.end) / frame.length) + 1
+    time.vector <- c(0, cumsum(rep(frame.length, reps)))
     # Interpolate according to user selection
     if (interpolation.type == 1)
         tac.inter <- approx(time.end0, tac0, xout = time.vector, rule = 2)
