@@ -23,7 +23,7 @@
 }
 \details{
   This function finds the earliest point that allows to
-  have a regression with less than 5% error between the
+  have a regression with less than 10% error between the
   chosen points (this parameter is controlled by the
   \code{maxerror} variable). If no point allows to have
   this error rate, the point that yields the minimum
