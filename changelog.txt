@@ -1,0 +1,12 @@
+v0.0.1 - 2013-07-22
+-------------------
+
+First released version. Contains:
+
+- 1 tissue reversible model.
+- 2 tissue reversible/irreversible model.
+- Patlak plot.
+- Logan plot.
+- 13-ammonia van den Hoff correction.
+
+The 2 tissue reversible model does not exactly match the PMOD results.
