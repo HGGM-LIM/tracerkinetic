@@ -40,7 +40,7 @@ lortie.model <- function(input.function, FLV, flow, k2, time.start, time.end,
     # computed from the flow parameter afterwards (see flow2k1 function).
     # Note that the flow2k1 function expects the flow in ml/min/g and this 
     # function computes the convolution in seconds, so unit conversion is needed
-    # both for input and output (K1 is needed here in ml/s/g).
+    # both for input and output (K1 is needed here in ml/min/g).
     K1 <- flow2k1(flow, a, b)
     dt <- tsample[2] - tsample[1] # dt = frame length
     sol <- convolve(K1*exp(-k2*tsample), dt * rev(input.function.inter), 
