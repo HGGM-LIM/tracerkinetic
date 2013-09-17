@@ -125,7 +125,7 @@ reversible.2c.fit <- function(input.function, tissue, time.start, time.end,
 #' 
 #' This model is basically the same as \code{\link{reversible.2c.model}} but
 #' the parameter \code{k4} is always 0. The simplified equation has been
-#' implemented in this function and can be fitterd using 
+#' implemented in this function and can be fitted using 
 #' \code{\link{irreversible.2c.fit}}.
 #' 
 #' @param input.function Input function TAC.
