@@ -92,11 +92,13 @@ reversible.2c.fit <- function(input.function, tissue, time.start, time.end,
                               weight = NA, plot = FALSE, 
                               interpolation.type = 1, ...) {
     
-    # Set appropriate weight values
-    if (is.na(weight) | is.null(weight))    # Constant weighting
-        weight <- rep(1, length(tissue))
-    else if (weight == "framelength")       # Frame length
-        weight <- time.end - time.start
+    if (length(weight) == 1) {
+        # Set appropriate weight values
+        if (is.na(weight) | is.null(weight))    # Constant weighting
+            weight <- rep(1, length(tissue))
+        else if (weight == "framelength")       # Frame length
+            weight <- time.end - time.start
+    }
     
     fit <- nlsLM(tissue ~ reversible.2c.model(input.function, K1, k2, k3, k4, 
                                               vB, time.start, time.end, 
@@ -206,11 +208,13 @@ irreversible.2c.fit <- function(input.function, tissue, time.start, time.end,
                                 weight = NA, plot = FALSE, 
                                 interpolation.type = 1, ...) {
             
-    # Set appropriate weight values
-    if (is.na(weight) | is.null(weight))    # Constant weighting
-        weight <- rep(1, length(tissue))
-    else if (weight == "framelength")       # Frame length
-        weight <- time.end - time.start
+    if (length(weight) == 1) {
+        # Set appropriate weight values
+        if (is.na(weight) | is.null(weight))    # Constant weighting
+            weight <- rep(1, length(tissue))
+        else if (weight == "framelength")       # Frame length
+            weight <- time.end - time.start
+    }
     
     fit <- nlsLM(tissue ~ irreversible.2c.model(input.function, K1, k2, k3, 
                                                 vB, time.start, time.end, 

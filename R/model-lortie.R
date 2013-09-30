@@ -109,11 +109,13 @@ lortie.fit <- function(input.function, tissue, time.start, time.end,
                        weight = NA, plot = FALSE, 
                        interpolation.type = 1, ...) {
     
-    # Set appropriate weight values
-    if (is.na(weight) | is.null(weight))    # Constant weighting
-        weight <- rep(1, length(tissue))
-    else if (weight == "framelength")       # Frame length
-        weight <- time.end - time.start
+    if (length(weight) == 1) {
+        # Set appropriate weight values
+        if (is.na(weight) | is.null(weight))    # Constant weighting
+            weight <- rep(1, length(tissue))
+        else if (weight == "framelength")       # Frame length
+            weight <- time.end - time.start
+    }
         
     fit <- nlsLM(tissue ~ lortie.model(input.function, FLV, flow, k2, 
                                        time.start, time.end, 
