@@ -87,8 +87,9 @@ flow2k1 <- function(flow, a = 0.77, b = 0.63) {
 #' @param FLV.upper,flow.upper,k2.upper Upper bounds.
 #' @param left.ventricle Left ventricle TAC, used for spill-over corretion.
 #'   Defaults to \code{input.function}.
-#' @param weight Weights for the non-linear least squares. Defaults to frame 
-#'   length.
+#' @param weight Weights for the non-linear least squares. Defaults to no
+#'   weighting. Use \code{"framelength"} to use the frame length as the weight
+#'   value.
 #' @param plot Should the results be plotted. Defaults to \code{FALSE}.
 #' @param interpolation.type Interpolation type selection. Passed to
 #'   \code{\link{interpolate.tac}}. Defaults to 1.
@@ -105,8 +106,14 @@ lortie.fit <- function(input.function, tissue, time.start, time.end,
                        flow.start = 0.5, flow.lower = 0, flow.upper = 8,
                        k2.start = 0.1, k2.lower = 0, k2.upper = 8,     
                        left.ventricle = input.function,
-                       weight = time.end - time.start, plot = FALSE, 
+                       weight = NA, plot = FALSE, 
                        interpolation.type = 1, ...) {
+    
+    # Set appropriate weight values
+    if (is.na(weight) | is.null(weight))    # Constant weighting
+        weight <- rep(1, length(tissue))
+    else if (weight == "framelength")       # Frame length
+        weight <- time.end - time.start
         
     fit <- nlsLM(tissue ~ lortie.model(input.function, FLV, flow, k2, 
                                        time.start, time.end, 

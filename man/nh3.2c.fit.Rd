@@ -8,8 +8,7 @@ tracer.}
     k2.start = 0.1, k2.lower = 0, k2.upper = 8,
     k3.start = 0.1, k3.lower = 0, k3.upper = 8,
     vB.start = 0.05, vB.lower = 0, vB.upper = 1,
-    weight = time.end - time.start, plot = FALSE,
-    interpolation.type = 1, ...)
+    weight = NA, plot = FALSE, interpolation.type = 1, ...)
 }
 \arguments{
   \item{input.function}{Input function TAC.}
@@ -31,8 +30,9 @@ tracer.}
   \item{K1.upper,k2.upper,k3.upper,vB.upper}{Parameter
   upper bounds.}
 
-  \item{weight}{Weight vector for the non-linear squares
-  fit. Defaults to frame length.}
+  \item{weight}{Weights for the non-linear least squares.
+  Defaults to no weighting. Use \code{"framelength"} to use
+  the frame length as the weight value.}
 
   \item{plot}{\code{TRUE} if a plot is to be shown.
   Defaults to \code{FALSE}.}

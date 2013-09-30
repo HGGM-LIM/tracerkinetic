@@ -7,8 +7,7 @@
     FLV.upper = 1, flow.start = 0.5, flow.lower = 0,
     flow.upper = 8, k2.start = 0.1, k2.lower = 0,
     k2.upper = 8, left.ventricle = input.function,
-    weight = time.end - time.start, plot = FALSE,
-    interpolation.type = 1, ...)
+    weight = NA, plot = FALSE, interpolation.type = 1, ...)
 }
 \arguments{
   \item{input.function}{Input function TAC (typically, left
@@ -41,7 +40,8 @@
   \code{input.function}.}
 
   \item{weight}{Weights for the non-linear least squares.
-  Defaults to frame length.}
+  Defaults to no weighting. Use \code{"framelength"} to use
+  the frame length as the weight value.}
 
   \item{plot}{Should the results be plotted. Defaults to
   \code{FALSE}.}

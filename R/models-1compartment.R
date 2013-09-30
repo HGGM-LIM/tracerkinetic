@@ -45,8 +45,9 @@ reversible.1c.model <- function(input.function, K1, k2, vB,
 #' @param K1.upper,k2.upper,vB.upper Parameter upper bounds.
 #' @param left.ventricle Left ventricle TAC, used for spill-over corretion.
 #'   Defaults to \code{input.function}.
-#' @param weight Weight vector for the non-linear squares fit. Defaults to
-#'  frame length.
+#' @param weight Weights for the non-linear least squares. Defaults to no
+#'   weighting. Use \code{"framelength"} to use the frame length as the weight
+#'   value.
 #' @param plot \code{TRUE} if a plot is to be shown. Defaults to \code{FALSE}.
 #' @param interpolation.type Interpolation type selection. Passed to
 #'   \code{\link{interpolate.tac}}. Defaults to 1.
@@ -61,8 +62,14 @@ reversible.1c.fit <- function(input.function, tissue, time.start, time.end,
                               k2.start = 0.5, k2.lower = 0, k2.upper = 1,
                               vB.start = 0.05, vB.lower = 0, vB.upper = 1,
                               left.ventricle = input.function,
-                              weight = time.end - time.start, plot = FALSE, 
+                              weight = NA, plot = FALSE, 
                               interpolation.type = 1, ...) {   
+    
+    # Set appropriate weight values
+    if (is.na(weight) | is.null(weight))    # Constant weighting
+        weight <- rep(1, length(tissue))
+    else if (weight == "framelength")       # Frame length
+        weight <- time.end - time.start
         
     fit <- nlsLM(tissue ~ reversible.1c.model(input.function, K1, k2, 
                                               vB, time.start, time.end,

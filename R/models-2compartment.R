@@ -70,8 +70,9 @@ reversible.2c.model <- function(input.function, K1, k2, k3, k4, vB,
 #' @param K1.upper,k2.upper,k3.upper,k4.upper,vB.upper Parameter upper bounds.
 #' @param left.ventricle Left ventricle TAC, used for spill-over corretion.
 #'   Defaults to \code{input.function}.
-#' @param weight Weight vector for the non-linear squares fit. Defaults to
-#'  frame length.
+#' @param weight Weights for the non-linear least squares. Defaults to no
+#'   weighting. Use \code{"framelength"} to use the frame length as the weight
+#'   value.
 #' @param plot \code{TRUE} if a plot is to be shown. Defaults to \code{FALSE}.
 #' @param interpolation.type Interpolation type selection. Passed to
 #'   \code{\link{interpolate.tac}}. Defaults to 1.
@@ -88,8 +89,14 @@ reversible.2c.fit <- function(input.function, tissue, time.start, time.end,
                               k4.start = 0.01, k4.lower = 0, k4.upper = 8,
                               vB.start = 0.05, vB.lower = 0, vB.upper = 1,
                               left.ventricle = input.function, 
-                              weight = time.end - time.start, plot = FALSE, 
+                              weight = NA, plot = FALSE, 
                               interpolation.type = 1, ...) {
+    
+    # Set appropriate weight values
+    if (is.na(weight) | is.null(weight))    # Constant weighting
+        weight <- rep(1, length(tissue))
+    else if (weight == "framelength")       # Frame length
+        weight <- time.end - time.start
     
     fit <- nlsLM(tissue ~ reversible.2c.model(input.function, K1, k2, k3, k4, 
                                               vB, time.start, time.end, 
@@ -178,8 +185,9 @@ irreversible.2c.model <- function(input.function, K1, k2, k3, vB,
 #' @param K1.upper,k2.upper,k3.upper,vB.upper Parameter upper bounds.
 #' @param left.ventricle Left ventricle TAC, used for spill-over corretion.
 #'   Defaults to \code{input.function}.
-#' @param weight Weight vector for the non-linear squares fit. Defaults to
-#'  frame length.
+#' @param weight Weights for the non-linear least squares. Defaults to no
+#'   weighting. Use \code{"framelength"} to use the frame length as the weight
+#'   value.
 #' @param plot \code{TRUE} if a plot is to be shown. Defaults to \code{FALSE}.
 #' @param interpolation.type Interpolation type selection. Passed to
 #'   \code{\link{interpolate.tac}}. Defaults to 1.
@@ -195,9 +203,15 @@ irreversible.2c.fit <- function(input.function, tissue, time.start, time.end,
                                 k3.start = 0.1, k3.lower = 0, k3.upper = 8,
                                 vB.start = 0.05, vB.lower = 0, vB.upper = 1,
                                 left.ventricle = input.function,
-                                weight = time.end - time.start, plot = FALSE, 
+                                weight = NA, plot = FALSE, 
                                 interpolation.type = 1, ...) {
             
+    # Set appropriate weight values
+    if (is.na(weight) | is.null(weight))    # Constant weighting
+        weight <- rep(1, length(tissue))
+    else if (weight == "framelength")       # Frame length
+        weight <- time.end - time.start
+    
     fit <- nlsLM(tissue ~ irreversible.2c.model(input.function, K1, k2, k3, 
                                                 vB, time.start, time.end, 
                                                 left.ventricle,
@@ -241,8 +255,9 @@ irreversible.2c.fit <- function(input.function, tissue, time.start, time.end,
 #' @param K1.start,k2.start,k3.start,vB.start Initial parameter values.
 #' @param K1.lower,k2.lower,k3.lower,vB.lower Parameter lower bounds.
 #' @param K1.upper,k2.upper,k3.upper,vB.upper Parameter upper bounds.
-#' @param weight Weight vector for the non-linear squares fit. Defaults to
-#'  frame length.
+#' @param weight Weights for the non-linear least squares. Defaults to no
+#'   weighting. Use \code{"framelength"} to use the frame length as the weight
+#'   value.
 #' @param plot \code{TRUE} if a plot is to be shown. Defaults to \code{FALSE}.
 #' @param interpolation.type Interpolation type selection. Passed to
 #'   \code{\link{interpolate.tac}}. Defaults to 1.
@@ -257,7 +272,7 @@ nh3.2c.fit <- function(input.function, tissue, time.start, time.end,
                        k2.start = 0.1, k2.lower = 0, k2.upper = 8,
                        k3.start = 0.1, k3.lower = 0, k3.upper = 8,
                        vB.start = 0.05, vB.lower = 0, vB.upper = 1,                       
-                       weight = time.end - time.start, plot = FALSE, 
+                       weight = NA, plot = FALSE, 
                        interpolation.type = 1, ...) {
     
     corr.input.function <- nh3.vdhoff.correction(input.function, time.end)    
