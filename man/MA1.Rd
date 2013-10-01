@@ -28,8 +28,8 @@
 }
 \references{
   M. Ichise, H. Toyama, R. Innis, and R. Carson,
-  “Strategies to improve neuroreceptor parameter
-  estimation by linear regression analysis,” J. Cereb.
-  Blood Flow Metab., vol. 22, pp. 1271–1281, 2002.
+  "Strategies to improve neuroreceptor parameter estimation
+  by linear regression analysis," J. Cereb. Blood Flow
+  Metab., vol. 22, pp. 1271-1281, 2002.
 }
 

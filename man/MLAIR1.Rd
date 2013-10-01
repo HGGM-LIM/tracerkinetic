@@ -27,9 +27,9 @@
 }
 \references{
   S. J. Kim, J. S. Lee, Y. K. Kim, J. Frost, G. Wand, M. E.
-  McCaul, and D. S. Lee, “Multiple linear analysis
-  methods for the quantification of irreversibly binding
-  radiotracers.,” J. Cereb. Blood Flow Metab., vol. 28,
-  no. 12, pp. 1965–77, Dec. 2008.
+  McCaul, and D. S. Lee, "Multiple linear analysis methods
+  for the quantification of irreversibly binding
+  radiotracers.," J. Cereb. Blood Flow Metab., vol. 28, no.
+  12, pp. 1965-77, Dec. 2008.
 }
 

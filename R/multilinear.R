@@ -1,20 +1,20 @@
 #' Multilinear analysis 1 (MA1) for reversible 2-tissue model.
-#' 
+#'
 #' This method needs to find the optimal linear point. This is yet to be 
 #' implemented and this method should not be used. The code is nevertheless
 #' included in this file for completeness.
-#' 
+#'  
 #' @param input.function Input function TAC.
 #' @param tissue Tissue TAC.
 #' @param time.start Initial acquisition time for each frame (in minutes).
 #' @param time.end Final acquisition time for each frame (in minutes).
-#'   
-#' @return A list with two fields: \code{kparms}, that contains the kinetic 
+#' 
+#' @return A list with two fields: \code{kparms}, that contains the kinetic
 #'   parameters, and \code{fit}, which contains the linear least squares fit.
 #'   
-#' @references M. Ichise, H. Toyama, R. Innis, and R. Carson, “Strategies to 
-#'   improve neuroreceptor parameter estimation by linear regression analysis,” 
-#'   J. Cereb. Blood Flow Metab., vol. 22, pp. 1271–1281, 2002.
+#' @references M. Ichise, H. Toyama, R. Innis, and R. Carson, "Strategies to
+#'   improve neuroreceptor parameter estimation by linear regression analysis,"
+#'   J. Cereb. Blood Flow Metab., vol. 22, pp. 1271-1281, 2002.
 
 MA1 <- function(input.function, tissue, time.start, time.end) {
     
@@ -43,9 +43,9 @@ MA1 <- function(input.function, tissue, time.start, time.end) {
 #' @return A list with two fields: \code{kparms}, that contains the kinetic
 #'   parameters, and \code{fit}, which contains the linear least squares fit.
 #'   
-#' @references M. Ichise, H. Toyama, R. Innis, and R. Carson, “Strategies to
-#'   improve neuroreceptor parameter estimation by linear regression analysis,”
-#'   J. Cereb. Blood Flow Metab., vol. 22, pp. 1271–1281, 2002.
+#' @references M. Ichise, H. Toyama, R. Innis, and R. Carson, "Strategies to
+#'   improve neuroreceptor parameter estimation by linear regression analysis,"
+#'   J. Cereb. Blood Flow Metab., vol. 22, pp. 1271-1281, 2002.
 MA2 <- function(input.function, tissue, time.start, time.end) {
     
     dt <- time.end - time.start
@@ -82,9 +82,9 @@ MA2 <- function(input.function, tissue, time.start, time.end) {
 #'   parameters, and \code{fit}, which contains the linear least squares fit.
 #' 
 #' @references S. J. Kim, J. S. Lee, Y. K. Kim, J. Frost, G. Wand, M. E. McCaul,
-#'   and D. S. Lee, “Multiple linear analysis methods for the quantification of
-#'   irreversibly binding radiotracers.,” J. Cereb. Blood Flow Metab., vol. 28,
-#'   no. 12, pp. 1965–77, Dec. 2008.
+#'   and D. S. Lee, "Multiple linear analysis methods for the quantification of
+#'   irreversibly binding radiotracers.," J. Cereb. Blood Flow Metab., vol. 28,
+#'   no. 12, pp. 1965-77, Dec. 2008.
 MLAIR1 <- function(input.function, tissue, time.start, time.end) {
     
     dt <- time.end - time.start
@@ -120,9 +120,9 @@ MLAIR1 <- function(input.function, tissue, time.start, time.end) {
 #'   parameters, and \code{fit}, which contains the linear least squares fit.
 #' 
 #' @references S. J. Kim, J. S. Lee, Y. K. Kim, J. Frost, G. Wand, M. E. McCaul,
-#'   and D. S. Lee, “Multiple linear analysis methods for the quantification of
-#'   irreversibly binding radiotracers.,” J. Cereb. Blood Flow Metab., vol. 28,
-#'   no. 12, pp. 1965–77, Dec. 2008.
+#'   and D. S. Lee, "Multiple linear analysis methods for the quantification of
+#'   irreversibly binding radiotracers.," J. Cereb. Blood Flow Metab., vol. 28,
+#'   no. 12, pp. 1965-77, Dec. 2008.
 MLAIR2 <- function(input.function, tissue, time.start, time.end) {
     
     dt <- time.end - time.start
