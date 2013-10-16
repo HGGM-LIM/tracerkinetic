@@ -38,11 +38,6 @@ logan.plot <- function(input.function, tissue, time.start, time.end,
     termy <- cumsum(tissue * dt) / tissue
     termx <- cumsum(input.function * dt) / tissue
     
-    # Correct bad points (just for aesthetic purposes)
-    bad <- termx < 0 | termy < 0
-    termx[bad] <- 0
-    termy[bad] <- 0
-    
     # The fitting and plotting is done by this helper function
     res <- processlinear(termx, termy, plot, main = "Logan", 
                          xlab = "Int(Cplasma) / Ctissue [min]",
