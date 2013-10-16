@@ -17,15 +17,22 @@
 #'   and the actual fitted object, \code{fit}.
 
 findbestfit <- function(x, y, minpoints = 3, maxerror = 0.10) {
+    
+    # It is possible that x and y have NAs from the previous computations. 
+    # The easiest way of dealing with this is to remove them
+    navalues <- is.na(x) | is.na(y)
+    x <- x[!navalues]
+    y <- y[!navalues]    
         
     fitdata <- data.frame(x, y)
     n <- nrow(fitdata)
-    res <- rep(NA, n - minpoints + 1)
+    limit <- n - minpoints + 1
+    res <- rep(NA, limit)
     
-    for (i in 1:(n - minpoints + 1)) {
-        fd <- fitdata[i:n, ]        
-        lm1 <- lm(y ~ x, data = fd)    
-        res[i] <- max(lm1$residuals / fd$y)
+    for (i in 1:limit) {
+        fd <- fitdata[i:n, ]              
+        lm1 <- lm(y ~ x, data = fd)                  
+        res[i] <- max(abs(lm1$residuals / fd$y))
     }            
     
     suppressWarnings(respoint <- min(which(res < maxerror)))
