@@ -20,24 +20,26 @@ findbestfit <- function(x, y, minpoints = 3, maxerror = 0.10) {
     
     # It is possible that x and y have NAs from the previous computations. 
     # The easiest way of dealing with this is to remove them
-    navalues <- is.na(x) | is.na(y)
+    navalues <- is.na(x) | is.na(y) | is.infinite(x) | is.infinite(y) |
+                is.nan(x) | is.nan(y)
     x <- x[!navalues]
     y <- y[!navalues]    
         
     fitdata <- data.frame(x, y)
     n <- nrow(fitdata)
     limit <- n - minpoints + 1
-    res <- rep(NA, limit)
+    respoint <- 1
     
     for (i in 1:limit) {
         fd <- fitdata[i:n, ]              
         lm1 <- lm(y ~ x, data = fd)                  
-        res[i] <- max(abs(lm1$residuals / fd$y))
+        maxresid <- max(abs(lm1$residuals / fd$y))
+        if (maxresid < maxerror) {
+            respoint <- i
+            break
+        }        
     }            
-    
-    suppressWarnings(respoint <- min(which(res < maxerror)))
-    if (respoint == Inf) 
-        respoint <- which(res == min(res))        
+       
     lmres <- lm(y ~ x, data = fitdata[respoint:n, ])
     return(list(initial.time.point = respoint, fit = lmres))  
     
