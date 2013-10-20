@@ -41,7 +41,8 @@ MA1 <- function(input.function, tissue, time.start, time.end) {
 #' @param time.end Final acquisition time for each frame (in minutes).
 #' 
 #' @return A list with two fields: \code{kparms}, that contains the kinetic
-#'   parameters, and \code{fit}, which contains the linear least squares fit.
+#'   parameters (Vt, Vs, Vn), and \code{fit}, which contains the linear least 
+#'   squares fit.
 #'   
 #' @references M. Ichise, H. Toyama, R. Innis, and R. Carson, "Strategies to
 #'   improve neuroreceptor parameter estimation by linear regression analysis,"
@@ -55,8 +56,9 @@ MA2 <- function(input.function, tissue, time.start, time.end) {
     
     x1 <- cumsum(c1 * dt)
     x2 <- cumsum(c2 * dt)
-    x3 <- c1
-    x4 <- c2
+    x3 <- c2
+    x4 <- c1
+
     
     ma2 <- lm(tissue ~ x1 + x2 + x3 + x4)
     
@@ -66,8 +68,10 @@ MA2 <- function(input.function, tissue, time.start, time.end) {
     g3 <- coefs[4]
     g4 <- coefs[5]    
     Vt <- -g1 / g2
+    Vs <- (-g1*(g1 + g3*g4) + g2*g4*g4)/(g2*(g1 + g3*g4))
+    Vn <- Vt - Vs
     
-    return(list(kparms = Vt, fit = ma2))
+    return(list(kparms = c(Vt, Vs, Vn), fit = ma2))
 }
 
 #' Implements the Multiple linear analysis for irreversible radiotracer 1

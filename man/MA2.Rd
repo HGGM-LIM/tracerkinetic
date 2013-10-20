@@ -17,8 +17,8 @@
 }
 \value{
   A list with two fields: \code{kparms}, that contains the
-  kinetic parameters, and \code{fit}, which contains the
-  linear least squares fit.
+  kinetic parameters (Vt, Vs, Vn), and \code{fit}, which
+  contains the linear least squares fit.
 }
 \description{
   Multilinear analysis 2 (MA2) for reversible 2-tissue
