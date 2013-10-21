@@ -21,10 +21,8 @@
   linear least squares fit.
 }
 \description{
-  This method needs to find the optimal linear point. This
-  is yet to be implemented and this method should not be
-  used. The code is nevertheless included in this file for
-  completeness.
+  Multilinear analysis 1 (MA1) for reversible 2-tissue
+  model.
 }
 \references{
   M. Ichise, H. Toyama, R. Innis, and R. Carson,
