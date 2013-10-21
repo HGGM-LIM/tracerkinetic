@@ -23,7 +23,23 @@ MA1 <- function(input.function, tissue, time.start, time.end) {
     x1 <- cumsum(input.function * dt)
     x2 <- cumsum(tissue * dt)
     
-    ma1 <- lm(tissue ~ x1 + x2)
+    # This method needs to find the linear part of the equation (T > t*). We
+    # proceed using the same for loop that is used in the findbestfit
+    # method
+    maxerror <- 0.10
+    minpoints <- 3
+    fitdata <- data.frame(x1, x2, tissue)
+    n <- nrow(fitdata)
+    limit <- n - minpoints + 1    
+    
+    for (i in 1:limit) {
+        fd <- fitdata[i:n, ]              
+        ma1 <- lm(tissue ~ x1 + x2, data = fd)                  
+        maxresid <- max(abs(ma1$residuals / fd$tissue))
+        if (maxresid < maxerror) {            
+            break
+        }        
+    }            
     
     coefs <- as.numeric(coef(ma1))
     t1 <- coefs[2]
