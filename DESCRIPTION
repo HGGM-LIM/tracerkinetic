@@ -1,8 +1,8 @@
 Package: traceRkinetic
 Type: Package
 Title: Kinetic analysis for dynamic nuclear imaging: compartmental models
-Version: 0.0.5
-Date: 2013-09-30
+Version: 0.0.6
+Date: 2013-10-21
 Author: Jose Maria Mateos-Perez
 Maintainer: Jose Maria Mateos-Perez <jmmateos@mce.hggm.es>
 Description: This package implements compartmental models and linear 
