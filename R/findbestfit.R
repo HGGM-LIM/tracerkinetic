@@ -40,7 +40,7 @@ findbestfit <- function(x, y, minpoints = 3, maxerror = 0.10) {
         }        
     }            
        
-    lmres <- lm(y ~ x, data = fitdata[respoint:n, ])
+    lmres <- lm1
     return(list(initial.time.point = respoint, fit = lmres))  
     
 }
