@@ -30,19 +30,19 @@ MA1 <- function(input.function, tissue, time.start, time.end) {
     
     for (i in 1:limit) {
         fd <- fitdata[i:n, ]              
-        ma1 <- lm(tissue ~ x1 + x2, data = fd)                  
+        ma1 <- lm(tissue ~ 0 + x1 + x2, data = fd)                  
         maxresid <- max(abs(ma1$residuals / fd$tissue))
         if (maxresid < maxerror) {            
             break
         }        
     }            
     
-    coefs <- as.numeric(coef(ma1))
-    t1 <- coefs[2]
-    t2 <- coefs[3]
-    Vt <- -t1 / t2
+    coefs <- as.numeric(coef(ma1))    
+    g1 <- coefs[1]
+    g2 <- coefs[2]
+    Vt <- -g1 / g2
     
-    return(list(kparms = Vt, fit = ma1))    
+    return(list(kparms = data.frame(Vt, g1, g2), fit = ma1))    
 }
 
 #' Multilinear analysis 2 (MA2) for reversible 2-tissue model.
@@ -64,26 +64,34 @@ MA2 <- function(input.function, tissue, time.start, time.end) {
     dt <- time.end - time.start
     
     c1 <- cumsum(input.function * dt)
-    c2 <- cumsum(tissue * dt)
+    c2 <- cumsum(tissue * dt) 
     
     x1 <- cumsum(c1 * dt)
     x2 <- cumsum(c2 * dt)
     x3 <- c2
     x4 <- c1
-
     
-    ma2 <- lm(tissue ~ x1 + x2 + x3 + x4)
+    ma2 <- lm(tissue ~ 0 + x1 + x2 + x3 + x4)
     
     coefs <- as.numeric(coef(ma2))
-    g1 <- coefs[2]
-    g2 <- coefs[3]
-    g3 <- coefs[4]
-    g4 <- coefs[5]    
+    g1 <- coefs[1]
+    g2 <- coefs[2]
+    g3 <- coefs[3]
+    g4 <- coefs[4]    
     Vt <- -g1 / g2
     Vs <- (-g1*(g1 + g3*g4) + g2*g4*g4)/(g2*(g1 + g3*g4))
     Vn <- Vt - Vs
     
-    return(list(kparms = c(Vt, Vs, Vn), fit = ma2))
+    # This method might allow to extract the individual K rates
+    # from the "g" parameters. This formulation is stille pending 
+    # a validation and should NOT be used.
+    K1 <- g4
+    k3 <- -Vs*g2/g4
+    k4 <- -1/((-(g3 + k3)/g2) + (Vt / K1) + k3/g2)
+    k2 <- -g2/k4
+    
+    return(list(kparms = data.frame(Vt, Vs, Vn, K1, k2, k3, k4, g1, g2, g3, g4), 
+                fit = ma2))
 }
 
 #' Implements the Multiple linear analysis for irreversible radiotracer 1
@@ -112,16 +120,16 @@ MLAIR1 <- function(input.function, tissue, time.start, time.end) {
     x3 <- cumsum(tissue * dt)
     x4 <- cumsum(c1 * dt)
     
-    mlair1 <- lm(tissue ~ x1 + x2 + x3 + x4)
+    mlair1 <- lm(tissue ~ 0 + x1 + x2 + x3 + x4)
     
     coefs <- as.numeric(coef(mlair1))
-    P1 <- coefs[2]
-    P2 <- coefs[3]
-    P3 <- coefs[4]
-    P4 <- coefs[5]
+    P1 <- coefs[1]
+    P2 <- coefs[2]
+    P3 <- coefs[3]
+    P4 <- coefs[4]
     Ki <- - P4 / P3
     
-    return(list(kparms = c(Ki, P1, P2, P3, P4), fit = mlair1)) 
+    return(list(kparms = data.frame(Ki, P1, P2, P3, P4), fit = mlair1)) 
 }
 
 #' Implements the Multiple linear analysis for irreversible radiotracer 2
@@ -151,13 +159,13 @@ MLAIR2 <- function(input.function, tissue, time.start, time.end) {
     x3 <- input.function
     x4 <- tissue
     
-    mlair2 <- lm(y ~ x1 + x2 + x3 + x4)
+    mlair2 <- lm(y ~ 0 + x1 + x2 + x3 + x4)
     coefs <- as.numeric(coef(mlair2))
-    P1 <- coefs[2]
-    P2 <- coefs[3]
-    P3 <- coefs[4]
-    P4 <- coefs[5]        
+    P1 <- coefs[1]
+    P2 <- coefs[2]
+    P3 <- coefs[3]
+    P4 <- coefs[4]        
     Ki <- P1
     
-    return(list(kparms = c(Ki, P1, P2, P3, P4), fit = mlair2))    
+    return(list(kparms = data.frame(Ki, P1, P2, P3, P4), fit = mlair2))    
 }
