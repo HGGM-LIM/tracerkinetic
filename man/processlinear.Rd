@@ -14,9 +14,10 @@
   function.}
 }
 \value{
-  Returns a list with three fields: \code{kparms}, the
+  Returns a list with four fields: \code{kparms}, the
   computed kinetic parameters; \code{stderrors}, the
-  standard errors for each parameter as a percentage;
+  standard errors for each parameter; \code{stderrorsp},
+  the standard errors for each parameter as a percentage;
   \code{fit}, the actual fitted object.
 }
 \description{

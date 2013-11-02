@@ -53,9 +53,10 @@ reversible.1c.model <- function(input.function, K1, k2, vB,
 #'   \code{\link{interpolate.tac}}. Defaults to 1.
 #' @param ... Other parameters passed to the plot function, if used.
 #' 
-#' @return Returns a list with three fields: \code{kparms}, the computed kinetic
-#'   parameters; \code{stderrors}, the standard errors for each parameter as a 
-#'   percentage; \code{fit}, the actual fitted object.
+#' @return Returns a list with four fields: \code{kparms}, the computed kinetic
+#'   parameters; \code{stderrors}, the standard errors for each parameter;
+#'   \code{stderrorsp}, the standard errors for each parameter as a percentage; 
+#'   \code{fit}, the actual fitted object.
 
 reversible.1c.fit <- function(input.function, tissue, time.start, time.end, 
                               K1.start = 0.5, K1.lower = 0, K1.upper = 1,
@@ -88,8 +89,8 @@ reversible.1c.fit <- function(input.function, tissue, time.start, time.end,
     
     # Get parameters and standard errors.
     kparms <- coef(fit)    
-    stderrors <- summary(fit)$coefficients[, 2]    
-    stderrors <- (stderrors / kparms) * 100    
+    stderrors <- summary(fit)$coefficients[, 2] 
+    stderrorsp <- (stderrors / kparms) * 100    
     
     if (plot == TRUE) {
         plotfit(tissue, fit, time.start, ...)
@@ -98,5 +99,6 @@ reversible.1c.fit <- function(input.function, tissue, time.start, time.end,
     # Return fit parameters and fit object
     list(kparms = as.data.frame(t(kparms)), 
          stderrors = as.data.frame(t(stderrors)),
+         stderrorsp = as.data.frame(t(stderrorsp)),
          fit = fit)
 }

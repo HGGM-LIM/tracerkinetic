@@ -1,6 +1,6 @@
 \name{nh3.2c.fit}
 \alias{nh3.2c.fit}
-\title{Computes the one-tissue compartmental model parameters for the 13-ammonia
+\title{Computes the two-tissue compartmental model parameters for the 13-ammonia
 tracer.}
 \usage{
   nh3.2c.fit(input.function, tissue, time.start, time.end,
@@ -44,9 +44,10 @@ tracer.}
   if used.}
 }
 \value{
-  Returns a list with three fields: \code{kparms}, the
+  Returns a list with four fields: \code{kparms}, the
   computed kinetic parameters; \code{stderrors}, the
-  standard errors for each parameter as a percentage;
+  standard errors for each parameter; \code{stderrorsp},
+  the standard errors for each parameter as a percentage;
   \code{fit}, the actual fitted object.
 }
 \description{

@@ -15,9 +15,10 @@
 #' @param plot Should the result be shown? Defaults to \code{TRUE}.
 #' @param ... Further parameters for the \code{plot} function.
 #' 
-#' @return Returns a list with three fields: \code{kparms}, the computed kinetic
-#'   parameters; \code{stderrors}, the standard errors for each parameter as a 
-#'   percentage; \code{fit}, the actual fitted object.
+#' @return Returns a list with four fields: \code{kparms}, the computed kinetic
+#'   parameters; \code{stderrors}, the standard errors for each parameter;
+#'   \code{stderrorsp}, the standard errors for each parameter as a percentage; 
+#'   \code{fit}, the actual fitted object.
 
 processlinear <- function(termx, termy, plot = TRUE, ...) {
     
@@ -26,8 +27,10 @@ processlinear <- function(termx, termy, plot = TRUE, ...) {
     
     coefs <- as.numeric(coef(fit$fit))
     res <- data.frame(intercept = coefs[1], slope = coefs[2])
+    stdabs <- coef(summary(fit$fit))[, 2]
+    stderr <- data.frame(intercept = stdabs[1], slope = stdabs[2])
     stderrors <- (coef(summary(fit$fit))[, 2] / abs(res)) * 100
-    stderr <- data.frame(intercept = stderrors[1], slope = stderrors[2])
+    stderrp <- data.frame(intercept = stderrors[1], slope = stderrors[2])
     
     if (plot == TRUE) {
         # Plotting style
@@ -37,6 +40,7 @@ processlinear <- function(termx, termy, plot = TRUE, ...) {
         abline(fit$fit)
     }
     
-    return(list(kparms = res, stderrors = stderr, fit = fit$fit))
+    return(list(kparms = res, stderrors = stderr, stdeerrorsp = stderrp, 
+                fit = fit$fit))
     
 }

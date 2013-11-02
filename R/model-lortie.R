@@ -96,9 +96,10 @@ flow2k1 <- function(flow, a = 0.77, b = 0.63) {
 #' @param ... If plotting is used, optional parameters are passed to the plot 
 #'   function.
 #'   
-#' @return Returns a list with three fields: \code{kparms}, the computed kinetic
-#'   parameters; \code{stderrors}, the standard errors for each parameter as a 
-#'   percentage; \code{fit}, the actual fitted object.
+#' @return Returns a list with four fields: \code{kparms}, the computed kinetic
+#'   parameters; \code{stderrors}, the standard errors for each parameter;
+#'   \code{stderrorsp}, the standard errors for each parameter as a percentage; 
+#'   \code{fit}, the actual fitted object.
 
 lortie.fit <- function(input.function, tissue, time.start, time.end, 
                        a = 0.77, b = 0.63,
@@ -133,10 +134,11 @@ lortie.fit <- function(input.function, tissue, time.start, time.end,
     # Get parameters and standard errors.
     kparms <- coef(fit)    
     stderrors <- summary(fit)$coefficients[, 2]    
-    stderrors <- (stderrors / kparms) * 100         
+    stderrorsp <- (stderrors / kparms) * 100         
     
     # Reorder
     stderrors <- stderrors[c(2, 3, 1)]
+    stderrorsp <- stderrorsp[c(2, 3, 1)]
     kparms <- c(flow2k1(kparms[2]), kparms[c(2, 3, 1)])
     names(kparms) <- c("K1", "flow", "k2", "FLV")
         
@@ -147,5 +149,6 @@ lortie.fit <- function(input.function, tissue, time.start, time.end,
     # Return a list with the result    
     list(kparms = as.data.frame(t(kparms)), 
          stderrors = as.data.frame(stderrors), 
+         stderrorsp = as.data.frame(stderrorsp),
          fit = fit)
 }

@@ -78,9 +78,10 @@ reversible.2c.model <- function(input.function, K1, k2, k3, k4, vB,
 #'   \code{\link{interpolate.tac}}. Defaults to 1.
 #' @param ... Other parameters passed to the plot function, if used.
 #' 
-#' @return Returns a list with three fields: \code{kparms}, the computed kinetic
-#'   parameters; \code{stderrors}, the standard errors for each parameter as a 
-#'   percentage; \code{fit}, the actual fitted object.
+#' @return Returns a list with four fields: \code{kparms}, the computed kinetic
+#'   parameters; \code{stderrors}, the standard errors for each parameter;
+#'   \code{stderrorsp}, the standard errors for each parameter as a percentage; 
+#'   \code{fit}, the actual fitted object.
 
 reversible.2c.fit <- function(input.function, tissue, time.start, time.end, 
                               K1.start = 0.1, K1.lower = 0, K1.upper = 8,
@@ -118,7 +119,7 @@ reversible.2c.fit <- function(input.function, tissue, time.start, time.end,
         
     kparms <- coef(fit)    
     stderrors <- summary(fit)$coefficients[, 2]    
-    stderrors <- (stderrors / kparms) * 100    
+    stderrorsp <- (stderrors / kparms) * 100    
         
     if (plot == TRUE) {
         plotfit(tissue, fit, time.start, ...)
@@ -127,6 +128,7 @@ reversible.2c.fit <- function(input.function, tissue, time.start, time.end,
     # Return fit parameters and fit object
     list(kparms = as.data.frame(t(kparms)), 
          stderrors = as.data.frame(t(stderrors)),
+         stderrorsp = as.data.frame(t(stderrorsp)),
          fit = fit)
 }
 
@@ -195,9 +197,10 @@ irreversible.2c.model <- function(input.function, K1, k2, k3, vB,
 #'   \code{\link{interpolate.tac}}. Defaults to 1.
 #' @param ... Other parameters passed to the plot function, if used.
 #' 
-#' @return Returns a list with three fields: \code{kparms}, the computed kinetic
-#'   parameters; \code{stderrors}, the standard errors for each parameter as a 
-#'   percentage; \code{fit}, the actual fitted object.
+#' @return Returns a list with four fields: \code{kparms}, the computed kinetic
+#'   parameters; \code{stderrors}, the standard errors for each parameter;
+#'   \code{stderrorsp}, the standard errors for each parameter as a percentage; 
+#'   \code{fit}, the actual fitted object.
 
 irreversible.2c.fit <- function(input.function, tissue, time.start, time.end, 
                                 K1.start = 0.1, K1.lower = 0, K1.upper = 8,
@@ -231,7 +234,7 @@ irreversible.2c.fit <- function(input.function, tissue, time.start, time.end,
     
     kparms <- coef(fit)        
     stderrors <- summary(fit)$coefficients[, 2]    
-    stderrors <- (stderrors / kparms) * 100       
+    stderrorsp <- (stderrors / kparms) * 100       
     
     if (plot == TRUE) {
         plotfit(tissue, fit, time.start, ...)
@@ -239,11 +242,12 @@ irreversible.2c.fit <- function(input.function, tissue, time.start, time.end,
     
     # Return fit parameters and fit object
     list(kparms = as.data.frame(t(kparms)), 
-         stderrors = stderrors,
+         stderrors = as.data.frame(t(stderrors)),
+         stderrorsp = as.data.frame(t(stderrorsp)),
          fit = fit)
 }
 
-#' Computes the one-tissue compartmental model parameters for the 13-ammonia
+#' Computes the two-tissue compartmental model parameters for the 13-ammonia
 #' tracer. 
 #' 
 #' Automatically performs the metabolite correction implemented in 
@@ -267,9 +271,10 @@ irreversible.2c.fit <- function(input.function, tissue, time.start, time.end,
 #'   \code{\link{interpolate.tac}}. Defaults to 1.
 #' @param ... Other parameters passed to the plot function, if used.
 #' 
-#' @return Returns a list with three fields: \code{kparms}, the computed kinetic
-#'   parameters; \code{stderrors}, the standard errors for each parameter as a 
-#'   percentage; \code{fit}, the actual fitted object.
+#' @return Returns a list with four fields: \code{kparms}, the computed kinetic
+#'   parameters; \code{stderrors}, the standard errors for each parameter;
+#'   \code{stderrorsp}, the standard errors for each parameter as a percentage; 
+#'   \code{fit}, the actual fitted object.
 
 nh3.2c.fit <- function(input.function, tissue, time.start, time.end, 
                        K1.start = 0.1, K1.lower = 0, K1.upper = 8,
