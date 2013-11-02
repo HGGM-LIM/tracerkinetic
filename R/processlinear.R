@@ -40,7 +40,7 @@ processlinear <- function(termx, termy, plot = TRUE, ...) {
         abline(fit$fit)
     }
     
-    return(list(kparms = res, stderrors = stderr, stdeerrorsp = stderrp, 
+    return(list(kparms = res, stderrors = stderr, stderrorsp = stderrp, 
                 fit = fit$fit))
     
 }
