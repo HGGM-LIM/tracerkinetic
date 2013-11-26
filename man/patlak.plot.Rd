@@ -3,7 +3,7 @@
 \title{Patlak plot implementation}
 \usage{
   patlak.plot(input.function, tissue, time.start, time.end,
-    plot = TRUE, ...)
+    plot = TRUE, maxerror = 0.1, ...)
 }
 \arguments{
   \item{input.function}{Input function TAC.}
@@ -17,6 +17,9 @@
 
   \item{plot}{Should the Patlak plot be displayed? Defaults
   to \code{TRUE}.}
+
+  \item{maxerror}{\code{maxerror} parameter to be passed to
+  \code{processlinear}.}
 
   \item{...}{Additional parameters passed to the
   \code{plot} function.}

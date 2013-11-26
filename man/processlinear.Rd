@@ -2,13 +2,17 @@
 \alias{processlinear}
 \title{Helper function for linear models}
 \usage{
-  processlinear(termx, termy, plot = TRUE, ...)
+  processlinear(termx, termy, plot = TRUE, maxerror = 0.1,
+    ...)
 }
 \arguments{
   \item{termx,termy}{The x and y values of the graph.}
 
   \item{plot}{Should the result be shown? Defaults to
   \code{TRUE}.}
+
+  \item{maxerror}{\code{maxerror} parameter to be passed to
+  \code{findbestfit} function.}
 
   \item{...}{Further parameters for the \code{plot}
   function.}

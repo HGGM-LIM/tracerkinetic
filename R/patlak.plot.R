@@ -9,6 +9,8 @@
 #' @param time.start Initial acquisition time for each frame.
 #' @param time.end Final acquisition time for each frame.
 #' @param plot Should the Patlak plot be displayed? Defaults to \code{TRUE}.
+#' @param maxerror \code{maxerror} parameter to be passed to
+#'  \code{processlinear}.
 #' @param ... Additional parameters passed to the \code{plot} function.
 #' 
 #' @details Please refer to the documentation of \code{\link{processlinear}}
@@ -25,7 +27,7 @@
 #' @seealso \code{\link{logan.plot}}.
 
 patlak.plot <- function(input.function, tissue, time.start, time.end, 
-                        plot = TRUE, ...) {
+                        plot = TRUE, maxerror = 0.1, ...) {
         
     # Compute data on both axis
     termy <- tissue / input.function
@@ -35,7 +37,9 @@ patlak.plot <- function(input.function, tissue, time.start, time.end,
     # The fitting and plotting is done by this helper function
     res <- processlinear(termx, termy, plot, main = "Patlak", 
                          xlab = "Int(Cplasma) / Cplasma [min]",
-                         ylab = "Ctissue / Cplasma [unitless]", ...)
+                         ylab = "Ctissue / Cplasma [unitless]", 
+                         maxerror = maxerror, 
+                         ...)
     
     return(res)
 }

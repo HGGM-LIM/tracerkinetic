@@ -13,6 +13,8 @@
 #' 
 #' @param termx,termy The x and y values of the graph.
 #' @param plot Should the result be shown? Defaults to \code{TRUE}.
+#' @param maxerror \code{maxerror} parameter to be passed to \code{findbestfit}
+#'  function.
 #' @param ... Further parameters for the \code{plot} function.
 #' 
 #' @return Returns a list with four fields: \code{kparms}, the computed kinetic
@@ -20,9 +22,9 @@
 #'   \code{stderrorsp}, the standard errors for each parameter as a percentage; 
 #'   \code{fit}, the actual fitted object.
 
-processlinear <- function(termx, termy, plot = TRUE, ...) {
+processlinear <- function(termx, termy, plot = TRUE, maxerror = 0.1, ...) {
     
-    fit <- findbestfit(termx, termy)
+    fit <- findbestfit(termx, termy, maxerror = maxerror)
     t0 <- fit$initial.time.point
     
     coefs <- as.numeric(coef(fit$fit))
