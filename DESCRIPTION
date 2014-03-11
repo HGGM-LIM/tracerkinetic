@@ -11,4 +11,4 @@ Description: This package implements compartmental models and linear
  and the frame times as input, and return the kinetic parameters and the 
  estimated errors.
 License: GPL-3
-Depends: minpack.lm
+Depends: minpack.lm, nnls
