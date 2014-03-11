@@ -29,5 +29,10 @@
   "Strategies to improve neuroreceptor parameter estimation
   by linear regression analysis," J. Cereb. Blood Flow
   Metab., vol. 22, pp. 1271-1281, 2002.
+
+  Y. Ikoma, H. Watabe, M. Shidahara, M. Naganawa, and Y.
+  Kimura, "PET kinetic analysis: error consideration of
+  quantitative analysis in dynamic studies.," Ann. Nucl.
+  Med., vol. 22, no. 1, pp. 1-11, Jan. 2008.
 }
 

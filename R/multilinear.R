@@ -58,7 +58,11 @@ MA1 <- function(input.function, tissue, time.start, time.end) {
 #'   
 #' @references M. Ichise, H. Toyama, R. Innis, and R. Carson, "Strategies to
 #'   improve neuroreceptor parameter estimation by linear regression analysis,"
-#'   J. Cereb. Blood Flow Metab., vol. 22, pp. 1271-1281, 2002.
+#'   J. Cereb. Blood Flow Metab., vol. 22, pp. 1271-1281, 2002. 
+#'     
+#'   Y. Ikoma, H. Watabe, M. Shidahara,  M. Naganawa, and Y. Kimura, 
+#'   "PET kinetic analysis: error consideration of quantitative analysis in 
+#'   dynamic studies.," Ann. Nucl. Med., vol. 22, no. 1, pp. 1-11, Jan. 2008.
 MA2 <- function(input.function, tissue, time.start, time.end) {
     
     dt <- time.end - time.start
@@ -82,13 +86,16 @@ MA2 <- function(input.function, tissue, time.start, time.end) {
     Vs <- (-g1*(g1 + g3*g4) + g2*g4*g4)/(g2*(g1 + g3*g4))
     Vn <- Vt - Vs
     
-    # This method might allow to extract the individual K rates
-    # from the "g" parameters. This formulation is stille pending 
-    # a validation and should NOT be used.
+    # This method allows to extract the individual K rate parameters from the
+    # 'g' values. Equations extracted from Y. Ikoma, H. Watabe, M. Shidahara, 
+    # M. Naganawa, and Y. Kimura, "PET kinetic analysis: error consideration of 
+    # quantitative analysis in dynamic studies.," Ann. Nucl. Med., vol. 22, 
+    # no. 1, pp. 1-11, Jan. 2008.
     K1 <- g4
-    k3 <- -Vs*g2/g4
-    k4 <- -1/((-(g3 + k3)/g2) + (Vt / K1) + k3/g2)
-    k2 <- -g2/k4
+    k2 <- -g1 / g4
+    k4 <- -g2 / k2
+    k3 <- -g3 - k2 - k4
+    
     
     return(list(kparms = data.frame(Vt, Vs, Vn, K1, k2, k3, k4, g1, g2, g3, g4), 
                 fit = ma2))
