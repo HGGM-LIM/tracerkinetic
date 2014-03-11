@@ -192,11 +192,14 @@ murase <- function(input.function, tissue, time.start, time.end) {
     x2 <- cumsum(tissue * dt)
     x3 <- input.function
 
-    lm1 <- lm(tissue ~ 0 + x1 + x2 + x3)
-    coefs <- as.numeric(coef(lm1))
+#     lm1 <- lm(tissue ~ 0 + x1 + x2 + x3)
+#     coefs <- as.numeric(coef(lm1))
 
-    K1 <- coefs[1] + coefs[2]*coefs[3]
-    k2 <- -coefs[2]
+    lm1 <- nnls(cbind(x1, -x2, x3), tissue)
+    coefs <- lm1$x
+
+    K1 <- coefs[1] - coefs[2]*coefs[3]
+    k2 <- coefs[2]
     vB <- coefs[3]
     
     return(list(kparms = data.frame(K1, k2, vB), fit = lm1))  
